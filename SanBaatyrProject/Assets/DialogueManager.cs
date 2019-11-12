@@ -18,11 +18,14 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Time.timeScale = 0f;
+        
         dialogueBox.gameObject.SetActive(true);
 
         dialogueBox.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = dialogue.name;
+        dialogueBox.transform.Find("Image").GetComponent<Image>().sprite = dialogue.image;
         sentences.Clear();
-
+        
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
@@ -46,6 +49,8 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         dialogueBox.gameObject.SetActive(false);
+        
+        Time.timeScale = 1f;
     }
 
 
