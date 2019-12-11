@@ -16,7 +16,6 @@ namespace Prefabs.Enemies
             _playerTransform = PlayerController.Instance.transform;
             _visionRadius = gameObject.GetComponent<Enemy>().enemyData.visionDistance;
         }
-    
 
 
         void Update()

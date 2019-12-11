@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using GUI.PopupText;
 using Interfaces;
 using Prefabs.Enemies;
 using Prefabs.MetaObjects.GUIManager;
+using Resources.PopupText;
 using UnityEngine;
 
 namespace Prefabs.Player
@@ -87,9 +87,9 @@ namespace Prefabs.Player
         private void Attack()
         {
             var enemiesColliders = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRadius)
-                .Where(enemyCollider => enemyCollider.CompareTag("Enemy") 
+                .Where(enemyCollider => enemyCollider.CompareTag("Enemy")
                                         && enemyCollider.GetComponent<Enemy>().currentHealth >= 0);
-            
+
             foreach (var enemyCollider in enemiesColliders)
             {
                 var enemy = enemyCollider.GetComponent<Enemy>();
@@ -132,11 +132,6 @@ namespace Prefabs.Player
                 GUIManager.Instance.ShowGameOverScreen();
                 _playerAnimator.SetTrigger("Death");
             }
-        }
-
-        public void UseAntiVirus()
-        {
-            Instantiate(Resources.Load("Prefabs/AntiVirusWave/AntiVirusWave"), transform.position, Quaternion.identity);
         }
     }
 }

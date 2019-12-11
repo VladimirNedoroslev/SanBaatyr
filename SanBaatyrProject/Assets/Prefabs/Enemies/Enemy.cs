@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using Pathfinding;
 using Prefabs.Player;
+using Resources.ScriptableObjects;
 using UnityEngine;
 
 namespace Prefabs.Enemies
@@ -23,10 +24,6 @@ namespace Prefabs.Enemies
             _animator = gameObject.GetComponent<Animator>();
         }
 
-        /// <summary>
-        /// Deals damage to the enemy.
-        /// </summary>
-        /// <param name="damage">Amount of damage</param>
         public void DealDamage(int damage)
         {
             currentHealth -= damage;
@@ -35,7 +32,6 @@ namespace Prefabs.Enemies
                 gameObject.GetComponent<PolygonCollider2D>().enabled = false;
                 gameObject.GetComponent<AIPath>().canMove = false;
                 _animator.SetTrigger("Death");
-
             }
         }
 

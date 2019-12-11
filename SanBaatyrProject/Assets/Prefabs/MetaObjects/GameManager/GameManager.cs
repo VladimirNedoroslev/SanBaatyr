@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GameManager : Singleton<GameManager>
+﻿namespace Prefabs.MetaObjects.GameManager
 {
+    public class GameManager : Singleton<GameManager>
+    {
 
+    }
 }

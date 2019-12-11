@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: ffb67fb9e8eb14b44ac1f3c1ee8b484f
   - enabled: 1
-    path: Assets/Scenes/Episode0.unity
+    path: Assets/Scenes/Episode1Intro/Episode1Intro.unity
     guid: a53fa81a5874fb24d8c3ea30aa717b15
   - enabled: 1
-    path: Assets/Scenes/Episode1.unity
+    path: Assets/Scenes/Episode1/Episode1.unity
     guid: 103e0ec6402db584c993e1751e402f4f
   - enabled: 1
-    path: Assets/Scenes/Episode2.unity
+    path: Assets/Scenes/Episode2/Episode2.unity
     guid: 61fa35d167474ea41b406de39b3f8a61
   m_configObjects: {}
