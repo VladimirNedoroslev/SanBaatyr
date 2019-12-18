@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5984151537278338486}
   - component: {fileID: 8739992803562361436}
   - component: {fileID: 7836509315471125224}
+  - component: {fileID: -1558617315556408421}
   - component: {fileID: 1474020253}
   - component: {fileID: 2539656583568172354}
   m_Layer: 0
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8285970749310787038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7adf14ba30dcecd4a87c0a32802c8124, type: 3}
   m_Name: 
@@ -212,6 +213,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1558617315556408421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8285970749310787038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b16a3e1e8bd314e825d0bef0b91e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: de56b65fc6cc15e42a0c3ce65eeb8d99, type: 2}
+  currentHealth: 0
+  lastAttackTime: 0
 --- !u!50 &1474020253
 Rigidbody2D:
   serializedVersion: 4
