@@ -1,21 +1,27 @@
-﻿using Interfaces;
+﻿using System;
+using Core.Player;
+using Interfaces;
 using Pathfinding;
-using Prefabs.Player;
 using Resources.ScriptableObjects;
 using UnityEngine;
 
-namespace Prefabs.Enemies
+namespace Core.Enemies
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IDamageable, IPooledObject
     {
         public EnemyData enemyData;
         public int currentHealth;
-
+        public float lastAttackTime;
 
         private Animator _animator;
         private AIDestinationSetter _aiDestinationSetter;
 
         public void Start()
+        {
+            OnObjectSpawn();
+        }
+
+        public void OnObjectSpawn()
         {
             currentHealth = enemyData.maxHealth;
             _aiDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
@@ -36,7 +42,7 @@ namespace Prefabs.Enemies
         }
 
 
-        public float lastAttackTime;
+        
 
         private float _attackCooldownTime = 1.0f;
 

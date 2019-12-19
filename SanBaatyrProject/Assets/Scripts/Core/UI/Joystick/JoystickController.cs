@@ -1,7 +1,7 @@
-﻿using Prefabs.Player;
+﻿using Core.Player;
 using UnityEngine;
 
-namespace General_UI.Joystick
+namespace Core.UI.Joystick
 {
     public class JoystickController : MonoBehaviour
     {

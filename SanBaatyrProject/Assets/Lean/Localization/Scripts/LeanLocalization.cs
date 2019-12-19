@@ -692,7 +692,7 @@ namespace Lean.Localization
 
 			LeanLocalization.CurrentLanguage = EditorGUI.TextField(rectA, "Current Language", LeanLocalization.CurrentLanguage);
 
-			if (GUI.Button(rectB, "List") == true)
+			if (UnityEngine.GUI.Button(rectB, "List") == true)
 			{
 				var menu = new GenericMenu();
 
@@ -816,7 +816,7 @@ namespace Lean.Localization
 			{
 				Dirty();
 			}
-			if (GUI.Button(rectC, "X", EditorStyles.miniButton) == true)
+			if (UnityEngine.GUI.Button(rectC, "X", EditorStyles.miniButton) == true)
 			{
 				Undo.RecordObject(Target, "Remove Prefab");
 
@@ -843,7 +843,7 @@ namespace Lean.Localization
 			EditorGUI.LabelField(rectA, "Translations", EditorStyles.boldLabel);
 			translationFilter = EditorGUI.TextField(rectB, "", translationFilter);
 			EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(translationFilter) == true || LeanLocalization.CurrentTranslations.ContainsKey(translationFilter) == true);
-				if (GUI.Button(rectC, "Add", EditorStyles.miniButton) == true)
+				if (UnityEngine.GUI.Button(rectC, "Add", EditorStyles.miniButton) == true)
 				{
 					var phrase = LeanLocalization.AddPhraseToFirst(translationFilter);
 
@@ -978,7 +978,7 @@ namespace Lean.Localization
 			EditorGUI.LabelField(rectA, "Tokens", EditorStyles.boldLabel);
 			tokensFilter = EditorGUI.TextField(rectB, "", tokensFilter);
 			EditorGUI.BeginDisabledGroup(string.IsNullOrEmpty(tokensFilter) == true || LeanLocalization.CurrentTokens.ContainsKey(tokensFilter) == true);
-				if (GUI.Button(rectC, "Add", EditorStyles.miniButton) == true)
+				if (UnityEngine.GUI.Button(rectC, "Add", EditorStyles.miniButton) == true)
 				{
 					var token = LeanLocalization.AddTokenToFirst(tokensFilter);
 

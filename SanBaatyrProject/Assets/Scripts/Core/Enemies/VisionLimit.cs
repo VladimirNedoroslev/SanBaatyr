@@ -1,8 +1,8 @@
-﻿using Pathfinding;
-using Prefabs.Player;
+﻿using Core.Player;
+using Pathfinding;
 using UnityEngine;
 
-namespace Prefabs.Enemies
+namespace Core.Enemies
 {
     public class VisionLimit : MonoBehaviour
     {

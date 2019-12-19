@@ -1,7 +1,7 @@
-﻿using Prefabs.Player;
+﻿using Core.Player;
 using UnityEngine;
 
-namespace GUI.PlayerHealth
+namespace Core.Health
 {
     public class HealthBar : MonoBehaviour
     {

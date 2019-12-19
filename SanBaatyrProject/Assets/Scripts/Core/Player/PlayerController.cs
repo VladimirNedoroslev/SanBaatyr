@@ -1,11 +1,11 @@
 ﻿using System.Linq;
+using Core.Enemies;
+using Core.FloatingText;
 using Interfaces;
-using Prefabs.Enemies;
 using Prefabs.MetaObjects.GUIManager;
-using Resources.PopupText;
 using UnityEngine;
 
-namespace Prefabs.Player
+namespace Core.Player
 {
     public class PlayerController : Singleton<PlayerController>, IDamageable
     {

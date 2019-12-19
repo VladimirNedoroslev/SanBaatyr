@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Resources.PopupText
+namespace Core.FloatingText
 {
     public class FloatingText : MonoBehaviour
     {

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
-namespace Resources.PopupText
+namespace Core.FloatingText
 {
     public class FloatTextController : MonoBehaviour
     {
