@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4390585086782275858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3480200384931783902}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3480200384931783902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390585086782275858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.85, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6762667088097403794}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6758243338153838096
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +364,7 @@ GameObject:
   - component: {fileID: 1662590277602890964}
   - component: {fileID: 348050463497571279}
   - component: {fileID: 1143162246}
+  - component: {fileID: 257731787421124858}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -353,6 +384,7 @@ Transform:
   m_LocalScale: {x: -0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 6762475630044626236}
+  - {fileID: 3480200384931783902}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -481,16 +513,12 @@ MonoBehaviour:
   maxHealth: 100
   speed: 10
   currentHealth: 100
-  attackRadius: 1
-  baseDamageMin: 3
-  baseDamageMax: 10
+  attackRadius: 2
   spriteGroup: []
-  attackTriggerCircleCollider2D: {fileID: 1662590277602890964}
   attack1Time: 0
   attack2Time: 0
   sortingOrder: 0
   sortingOrderOrigin: 0
-  lastAttackTime: 0
 --- !u!114 &1143162246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +532,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variableJoystick: {fileID: 0}
+--- !u!114 &257731787421124858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758345451038308404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d863ecd76fa6fe46b757870f5936ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6673184319052469436}
+  attackPoint: {fileID: 3480200384931783902}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  detectRange: 0.6
+  attackRange: 0.6
+  attackDamage: 20
+  attackRate: 1
 --- !u!1 &6758352788925994820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2926,7 @@ GameObject:
   - component: {fileID: 6762475630044626236}
   - component: {fileID: 6673184319052469436}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

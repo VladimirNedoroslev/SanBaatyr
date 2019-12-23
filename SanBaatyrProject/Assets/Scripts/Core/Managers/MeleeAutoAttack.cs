@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Enemies;
 using UnityEngine;
 
@@ -38,6 +39,12 @@ namespace Core.Managers
         bool EnemyDetected()
         {
             hitEnemys = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            
+            /*hitEnemys = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRange)
+                .Where(enemyCollider => enemyCollider.CompareTag("Enemy")
+                                        && enemyCollider.GetComponent<Enemy>().currentHealth >= 0).ToArray();*/
+            // я хз как указать несколько тэгов для атаки разных юнитов
+            
             if (hitEnemys.Length == 0)
                 return false;
             else
@@ -47,8 +54,6 @@ namespace Core.Managers
         void Attack()
         {
             animator.SetTrigger("Attack");
-
-            //Collider2D[] hitEnemys = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
             foreach (Collider2D enemy in hitEnemys)
             {
