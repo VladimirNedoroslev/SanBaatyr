@@ -816,6 +816,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy first
       objectReference: {fileID: 0}
+    - target: {fileID: 8285970749310787038, guid: c9db4853f6b2d5d429aa97c1f2117c58,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8285970749310787034, guid: c9db4853f6b2d5d429aa97c1f2117c58,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -952,17 +957,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 348050463497571279, guid: b337b8ab2bbb12e41b1b214fa056baa8,
-        type: 3}
-      propertyPath: attackRadius
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1143162246, guid: b337b8ab2bbb12e41b1b214fa056baa8, type: 3}
       propertyPath: variableJoystick
       value: 
       objectReference: {fileID: 1052548431}
+    - target: {fileID: 257731787421124858, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+        type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 257731787421124858, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+        type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 349717287}
+    - target: {fileID: 257731787421124858, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+        type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 257731787421124858, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+        type: 3}
+      propertyPath: detectRange
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 257731787421124858, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+        type: 3}
+      propertyPath: attackRange
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 257731787421124858, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+        type: 3}
+      propertyPath: attackRate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b337b8ab2bbb12e41b1b214fa056baa8, type: 3}
+--- !u!4 &349717287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3480200384931783902, guid: b337b8ab2bbb12e41b1b214fa056baa8,
+    type: 3}
+  m_PrefabInstance: {fileID: 349717286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &377987387
 PrefabInstance:
   m_ObjectHideFlags: 0
