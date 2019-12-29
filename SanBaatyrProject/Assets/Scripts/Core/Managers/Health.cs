@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Core.Interfaces;
 using UnityEngine;
 
 namespace Core.Managers
 {
-    public class Health
+    public class Health : MonoBehaviour
     {
         public int maxHealth;
-        private int currentHealth;
+        public int currentHealth;
 
         void Start()
         {
@@ -16,8 +17,19 @@ namespace Core.Managers
 
         public void TakeDamage(int damage)
         {
+            IHealth health = (IHealth) gameObject.GetComponent(typeof(IHealth));
+            
             currentHealth -= damage;
-            currentHealth = currentHealth < 0 ? 0 : currentHealth;
+            //currentHealth = currentHealth < 0 ? 0 : currentHealth;
+
+            if (isDead())
+            {
+                health.Die();
+            }
+            else
+            {
+                health.Hit();
+            }
         }
 
         public void Heal(int healthPoint)
