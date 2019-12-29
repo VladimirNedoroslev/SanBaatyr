@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Core.Enemies;
 using Core.FloatingText;
+using Core.Interfaces;
 using Core.Managers;
 using Interfaces;
 using Prefabs.MetaObjects.GUIManager;
@@ -8,11 +9,11 @@ using UnityEngine;
 
 namespace Core.Player
 {
-    public class PlayerController : Singleton<PlayerController>, IDamageable
+    public class PlayerController : Singleton<PlayerController>, IHealth
     {
-        public int maxHealth = 100;
+        //public int maxHealth = 100;
         public float speed = 20;
-        public int currentHealth = 100;
+        //public int currentHealth = 100;
 
         public SpriteRenderer[] spriteGroup;
 
@@ -24,6 +25,7 @@ namespace Core.Player
 
         public void Start()
         {
+            gameObject.GetComponent<Managers.Health>().Restore();
             _playerAnimator = Instance.transform.GetComponentInChildren<Animator>();
             spriteGroup = gameObject.transform.GetComponentsInChildren<SpriteRenderer>(true);
             InitializeAnimClipTimes();
@@ -73,21 +75,17 @@ namespace Core.Player
             }
         }
 
-        public void DealDamage(int damage)
-        {
-            currentHealth -= damage;
-            if (currentHealth <= 0)
-            {
-                Death();
-            }
-        }
-
-        public void Death()
+        public void Die()
         {
             gameObject.GetComponent<MeleeAutoAttack>().enabled = false;
             Time.timeScale = 0f;
             GUIManager.Instance.ShowGameOverScreen();
-            _playerAnimator.SetTrigger("Death");
+            _playerAnimator.SetTrigger("Die");
+        }
+
+        public void Hit()
+        {
+            _playerAnimator.SetTrigger("Hit");
         }
     }
 }

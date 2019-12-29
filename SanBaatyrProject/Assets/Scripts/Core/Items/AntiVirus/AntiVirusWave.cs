@@ -48,7 +48,7 @@ namespace Core.Items.AntiVirus
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().DealDamage(damage);
+                other.GetComponent<Managers.Health>().TakeDamage(damage);
             }
         }
     }
