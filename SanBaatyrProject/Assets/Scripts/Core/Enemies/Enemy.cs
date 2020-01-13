@@ -1,7 +1,7 @@
 ﻿using System;
 using Core.Interfaces;
 using Core.Player;
-using Core.Managers;
+using Core.Health;
 using Interfaces;
 using Pathfinding;
 using Resources.ScriptableObjects;
@@ -24,8 +24,8 @@ namespace Core.Enemies
 
         public void OnObjectSpawn()
         {
-            gameObject.GetComponent<Managers.Health>().maxHealth = enemyData.maxHealth;
-            gameObject.GetComponent<Managers.Health>().Restore();
+            gameObject.GetComponent<Health.Health>().maxHealth = enemyData.maxHealth;
+            gameObject.GetComponent<Health.Health>().Restore();
             _aiDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
             _aiDestinationSetter.target = PlayerController.Instance.transform;
             gameObject.GetComponent<AIPath>().maxSpeed = enemyData.speed;

@@ -10,12 +10,12 @@ namespace Core.Health
 
         private void FixedUpdate()
         {
-            if (PlayerController.Instance.GetComponent<Managers.Health>().currentHealth <= 0)
+            if (PlayerController.Instance.GetComponent<Health>().currentHealth <= 0)
             {
                 gameObject.SetActive(false);
             }
 
-            SetSize(PlayerController.Instance.GetComponent<Managers.Health>().currentHealth * 0.01f);
+            SetSize(PlayerController.Instance.GetComponent<Health>().currentHealth * 0.01f);
         }
 
         private void SetSize(float sizeNormalized)

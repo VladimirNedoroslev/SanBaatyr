@@ -58,7 +58,7 @@ namespace Core.Attack
 
             foreach (Collider2D enemy in hitEnemys)
             {
-                enemy.GetComponent<Health>().TakeDamage(attackDamage);
+                enemy.GetComponent<Health.Health>().TakeDamage(attackDamage);
             }
         }
 

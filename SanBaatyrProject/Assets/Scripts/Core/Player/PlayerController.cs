@@ -2,7 +2,8 @@
 using Core.Enemies;
 using Core.FloatingText;
 using Core.Interfaces;
-using Core.Managers;
+using Core.Health;
+using Core.Attack;
 using Interfaces;
 using Prefabs.MetaObjects.GUIManager;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Core.Player
 
         public void Start()
         {
-            gameObject.GetComponent<Managers.Health>().Restore();
+            gameObject.GetComponent<Health.Health>().Restore();
             _playerAnimator = Instance.transform.GetComponentInChildren<Animator>();
             spriteGroup = gameObject.transform.GetComponentsInChildren<SpriteRenderer>(true);
             InitializeAnimClipTimes();
