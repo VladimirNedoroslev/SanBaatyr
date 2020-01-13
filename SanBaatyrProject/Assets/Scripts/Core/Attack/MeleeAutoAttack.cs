@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Enemies;
+using Core.Health;
 using UnityEngine;
 
-namespace Core.Managers
+namespace Core.Attack
 {
     public class MeleeAutoAttack : MonoBehaviour
     {

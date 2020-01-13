@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Core.Interfaces;
 using UnityEngine;
 
-namespace Core.Managers
+namespace Core.Health
 {
     public class Health : MonoBehaviour
     {
