@@ -1,46 +1,51 @@
-﻿using Interfaces;
+﻿using System;
+using Core.Interfaces;
+using Core.Player;
+using Core.Health;
+using Interfaces;
 using Pathfinding;
-using Prefabs.Player;
 using Resources.ScriptableObjects;
 using UnityEngine;
 
-namespace Prefabs.Enemies
+namespace Core.Enemies
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IHealth, IPooledObject
     {
         public EnemyData enemyData;
-        public int currentHealth;
-
 
         private Animator _animator;
         private AIDestinationSetter _aiDestinationSetter;
+        private float _attackCooldownTime = 1.0f;
 
         public void Start()
         {
-            currentHealth = enemyData.maxHealth;
+            OnObjectSpawn();
+        }
+
+        public void OnObjectSpawn()
+        {
+            gameObject.GetComponent<Health.Health>().maxHealth = enemyData.maxHealth;
+            gameObject.GetComponent<Health.Health>().Restore();
             _aiDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
             _aiDestinationSetter.target = PlayerController.Instance.transform;
             gameObject.GetComponent<AIPath>().maxSpeed = enemyData.speed;
             _animator = gameObject.GetComponent<Animator>();
         }
 
-        public void DealDamage(int damage)
+        public void Die()
         {
-            currentHealth -= damage;
-            if (currentHealth <= 0)
-            {
-                gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-                gameObject.GetComponent<AIPath>().canMove = false;
-                _animator.SetTrigger("Death");
-            }
+            gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+            gameObject.GetComponent<AIPath>().canMove = false;
+            _animator.SetTrigger("Die");
+        }
+
+        public void Hit()
+        {
+            _animator.SetTrigger("Hit");
         }
 
 
-        public float lastAttackTime;
-
-        private float _attackCooldownTime = 1.0f;
-
-        public void OnCollisionStay2D(Collision2D other)
+        /*public void OnCollisionStay2D(Collision2D other)
         {
             if (Time.time > lastAttackTime && other.gameObject.CompareTag("Player"))
             {
@@ -48,13 +53,13 @@ namespace Prefabs.Enemies
                 _animator.SetTrigger("Attack");
                 Attack();
             }
-        }
+        }*/
 
 
-        private void Attack()
+        /*private void Attack()
         {
             PlayerController.Instance.DealDamage(enemyData.damage);
-        }
+        }*/
 
         public void DestroySelf()
         {

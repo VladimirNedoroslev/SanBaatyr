@@ -1,7 +1,7 @@
-﻿using Prefabs.Player;
+﻿using Core.Player;
 using UnityEngine;
 
-namespace GUI.PlayerHealth
+namespace Core.Health
 {
     public class HealthBar : MonoBehaviour
     {
@@ -10,12 +10,12 @@ namespace GUI.PlayerHealth
 
         private void FixedUpdate()
         {
-            if (PlayerController.Instance.currentHealth <= 0)
+            if (PlayerController.Instance.GetComponent<Health>().currentHealth <= 0)
             {
                 gameObject.SetActive(false);
             }
 
-            SetSize(PlayerController.Instance.currentHealth * 0.01f);
+            SetSize(PlayerController.Instance.GetComponent<Health>().currentHealth * 0.01f);
         }
 
         private void SetSize(float sizeNormalized)

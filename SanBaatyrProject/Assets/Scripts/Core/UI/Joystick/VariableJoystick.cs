@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace General_UI.Joystick
+namespace Core.UI.Joystick
 {
     public class VariableJoystick : Joystick
     {

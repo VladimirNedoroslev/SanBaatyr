@@ -1,7 +1,7 @@
-﻿using Prefabs.Player;
+﻿using Core.Player;
 using UnityEngine;
 
-namespace General_UI.Camera
+namespace Core.Camera
 {
     public class CameraController : MonoBehaviour
     {

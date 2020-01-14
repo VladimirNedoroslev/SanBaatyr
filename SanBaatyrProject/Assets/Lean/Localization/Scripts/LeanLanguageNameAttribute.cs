@@ -24,7 +24,7 @@ namespace Lean.Localization
 
 			EditorGUI.PropertyField(rectA, property);
 
-			if (GUI.Button(rectB, "List") == true)
+			if (UnityEngine.GUI.Button(rectB, "List") == true)
 			{
 				var menu = new GenericMenu();
 

@@ -21,18 +21,18 @@ namespace Lean.Localization
 		{
 			var left  = position; left.xMax -= 40;
 			var right = position; right.xMin = left.xMax + 2;
-			var color = GUI.color;
+			var color = UnityEngine.GUI.color;
 
 			if (LeanLocalization.CurrentTranslations.ContainsKey(property.stringValue) == false)
 			{
-				GUI.color = Color.red;
+				UnityEngine.GUI.color = UnityEngine.Color.red;
 			}
 
 			EditorGUI.PropertyField(left, property);
 
-			GUI.color = color;
+			UnityEngine.GUI.color = color;
 
-			if (GUI.Button(right, "List") == true)
+			if (UnityEngine.GUI.Button(right, "List") == true)
 			{
 				var menu = new GenericMenu();
 

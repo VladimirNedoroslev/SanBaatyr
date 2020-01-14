@@ -1,8 +1,8 @@
-﻿using Prefabs.Enemies;
+﻿using Core.Enemies;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Prefabs.Items.AntiVirus
+namespace Core.Items.AntiVirus
 {
     public class AntiVirusWave : MonoBehaviour
     {
@@ -48,7 +48,7 @@ namespace Prefabs.Items.AntiVirus
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().DealDamage(damage);
+                other.GetComponent<Health.Health>().TakeDamage(damage);
             }
         }
     }

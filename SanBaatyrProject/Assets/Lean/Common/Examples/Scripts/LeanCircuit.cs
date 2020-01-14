@@ -60,11 +60,11 @@ namespace Lean.Common.Examples
 							var rect3     = rect; rect.y += 1.0f;
 							var rect4     = rect; rect.y -= 1.0f;
 
-							GUI.Label(rect1, pointName, EditorStyles.miniBoldLabel);
-							GUI.Label(rect2, pointName, EditorStyles.miniBoldLabel);
-							GUI.Label(rect3, pointName, EditorStyles.miniBoldLabel);
-							GUI.Label(rect4, pointName, EditorStyles.miniBoldLabel);
-							GUI.Label(rect, pointName, EditorStyles.whiteMiniLabel);
+							UnityEngine.GUI.Label(rect1, pointName, EditorStyles.miniBoldLabel);
+							UnityEngine.GUI.Label(rect2, pointName, EditorStyles.miniBoldLabel);
+							UnityEngine.GUI.Label(rect3, pointName, EditorStyles.miniBoldLabel);
+							UnityEngine.GUI.Label(rect4, pointName, EditorStyles.miniBoldLabel);
+							UnityEngine.GUI.Label(rect, pointName, EditorStyles.whiteMiniLabel);
 						}
 
 						for (var i = 1; i < path.Points.Count; i++)
@@ -74,7 +74,7 @@ namespace Lean.Common.Examples
 							var midPoint = (pointA + pointB) * 0.5f;
 							var scrPoint = Camera.current.WorldToScreenPoint(matrix.MultiplyPoint(midPoint));
 				
-							if (GUI.Button(new Rect(scrPoint.x - 5.0f, Screen.height - scrPoint.y - 45.0f, 20.0f, 20.0f), "+") == true)
+							if (UnityEngine.GUI.Button(new Rect(scrPoint.x - 5.0f, Screen.height - scrPoint.y - 45.0f, 20.0f, 20.0f), "+") == true)
 							{
 								path.Points.Insert(i, midPoint); dirty = true;
 							}

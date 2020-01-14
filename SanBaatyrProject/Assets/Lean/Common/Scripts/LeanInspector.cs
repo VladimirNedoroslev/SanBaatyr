@@ -29,16 +29,16 @@ namespace Lean.Common
 
 		public static void BeginError(bool error, Color color)
 		{
-			colors.Add(GUI.color);
+			colors.Add(UnityEngine.GUI.color);
 
-			GUI.color = error == true ? color : colors[0];
+			UnityEngine.GUI.color = error == true ? color : colors[0];
 		}
 
 		public static void EndError()
 		{
 			var index = colors.Count - 1;
 
-			GUI.color = colors[index];
+			UnityEngine.GUI.color = colors[index];
 
 			colors.RemoveAt(index);
 		}
@@ -73,7 +73,7 @@ namespace Lean.Common
 			}
 			if (EditorGUI.EndChangeCheck() == true)
 			{
-				GUI.changed = true; Repaint();
+				UnityEngine.GUI.changed = true; Repaint();
 
 				Dirty();
 			}

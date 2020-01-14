@@ -1,37 +1,34 @@
 ﻿using System.Linq;
+using Core.Enemies;
+using Core.FloatingText;
+using Core.Interfaces;
+using Core.Health;
+using Core.Attack;
 using Interfaces;
-using Prefabs.Enemies;
 using Prefabs.MetaObjects.GUIManager;
-using Resources.PopupText;
 using UnityEngine;
 
-namespace Prefabs.Player
+namespace Core.Player
 {
-    public class PlayerController : Singleton<PlayerController>, IDamageable
+    public class PlayerController : Singleton<PlayerController>, IHealth
     {
-        public int maxHealth = 100;
+        //public int maxHealth = 100;
         public float speed = 20;
-        public int currentHealth = 100;
-        public float attackRadius;
-        public int baseDamageMin = 3;
-        public int baseDamageMax = 10;
+        //public int currentHealth = 100;
 
         public SpriteRenderer[] spriteGroup;
 
         private Animator _playerAnimator;
-        public CircleCollider2D attackTriggerCircleCollider2D;
 
         public float attack1Time;
         public float attack2Time;
-
-        private float attackCooldownTime = 1f;
+        
 
         public void Start()
         {
+            gameObject.GetComponent<Health.Health>().Restore();
             _playerAnimator = Instance.transform.GetComponentInChildren<Animator>();
             spriteGroup = gameObject.transform.GetComponentsInChildren<SpriteRenderer>(true);
-            attackTriggerCircleCollider2D.radius = attackRadius;
-            lastAttackTime = Time.time;
             InitializeAnimClipTimes();
         }
 
@@ -57,11 +54,6 @@ namespace Prefabs.Player
             _playerAnimator.SetFloat("MoveSpeed", speed * 0.1f);
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, attackRadius / 2);
-        }
-
 
         public int sortingOrder;
         public int sortingOrderOrigin;
@@ -84,54 +76,17 @@ namespace Prefabs.Player
             }
         }
 
-        private void Attack()
+        public void Die()
         {
-            var enemiesColliders = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRadius)
-                .Where(enemyCollider => enemyCollider.CompareTag("Enemy")
-                                        && enemyCollider.GetComponent<Enemy>().currentHealth >= 0);
-
-            foreach (var enemyCollider in enemiesColliders)
-            {
-                var enemy = enemyCollider.GetComponent<Enemy>();
-                Debug.Log(enemy.name);
-                if (enemy != null)
-                {
-                    var damage = GetAttackDamage();
-
-                    FloatTextController.CreateFloatText($"-{damage.ToString()}", Color.red,
-                        enemyCollider.transform.position);
-                    enemy.DealDamage(damage);
-                }
-            }
+            gameObject.GetComponent<MeleeAutoAttack>().enabled = false;
+            Time.timeScale = 0f;
+            GUIManager.Instance.ShowGameOverScreen();
+            _playerAnimator.SetTrigger("Die");
         }
 
-        private int GetAttackDamage()
+        public void Hit()
         {
-            return Random.Range(baseDamageMin, baseDamageMax);
-        }
-
-
-        public float lastAttackTime;
-
-        private void OnTriggerStay2D(Collider2D other)
-        {
-            if (Time.time > lastAttackTime && other.CompareTag("Enemy"))
-            {
-                lastAttackTime = Time.time + attackCooldownTime;
-                _playerAnimator.SetTrigger("Attack");
-                Attack();
-            }
-        }
-
-        public void DealDamage(int damage)
-        {
-            currentHealth -= damage;
-            if (currentHealth <= 0)
-            {
-                Time.timeScale = 0f;
-                GUIManager.Instance.ShowGameOverScreen();
-                _playerAnimator.SetTrigger("Death");
-            }
+            _playerAnimator.SetTrigger("Hit");
         }
     }
 }
