@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace Core.Health
 {
-    public class HealthBar : MonoBehaviour
+    public class HealhBarUI : MonoBehaviour
     {
         [SerializeField] private Transform barTransform;
 
 
         private void FixedUpdate()
         {
-            if (PlayerController.Instance.GetComponent<Health>().currentHealth <= 0)
+            if (PlayerController.Instance.GetComponent<BaseHealthBehavior>().CurrentHealth <= 0)
             {
                 gameObject.SetActive(false);
             }
 
-            SetSize(PlayerController.Instance.GetComponent<Health>().currentHealth * 0.01f);
+            SetSize(PlayerController.Instance.GetComponent<BaseHealthBehavior>().CurrentHealth * 0.01f);
         }
 
         private void SetSize(float sizeNormalized)

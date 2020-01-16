@@ -14,7 +14,7 @@ namespace Core.Enemies
         {
             _aiDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
             _playerTransform = PlayerController.Instance.transform;
-            _visionRadius = gameObject.GetComponent<Enemy>().enemyData.visionDistance;
+            _visionRadius = gameObject.GetComponent<BaseVirus>().enemyData.visionDistance;
         }
 
 

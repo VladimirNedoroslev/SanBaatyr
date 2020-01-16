@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Core.Enemies;
 using Core.FloatingText;
-using Core.Interfaces;
 using Core.Health;
 using Core.Attack;
 using Interfaces;
@@ -26,7 +25,7 @@ namespace Core.Player
 
         public void Start()
         {
-            gameObject.GetComponent<Health.Health>().Restore();
+            gameObject.GetComponent<Health.BaseHealthBehavior>().Restore();
             _playerAnimator = Instance.transform.GetComponentInChildren<Animator>();
             spriteGroup = gameObject.transform.GetComponentsInChildren<SpriteRenderer>(true);
             InitializeAnimClipTimes();
@@ -84,7 +83,7 @@ namespace Core.Player
             _playerAnimator.SetTrigger("Die");
         }
 
-        public void Hit()
+        public void GetDamage()
         {
             _playerAnimator.SetTrigger("Hit");
         }

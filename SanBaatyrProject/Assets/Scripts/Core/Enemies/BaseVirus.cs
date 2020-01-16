@@ -1,5 +1,4 @@
 ﻿using System;
-using Core.Interfaces;
 using Core.Player;
 using Core.Health;
 using Interfaces;
@@ -9,9 +8,10 @@ using UnityEngine;
 
 namespace Core.Enemies
 {
-    public class Enemy : MonoBehaviour, IHealth, IPooledObject
+    public class BaseVirus : MonoBehaviour, IPooledObject
     {
         public EnemyData enemyData;
+        public BaseHealthBehavior health;
 
         private Animator _animator;
         private AIDestinationSetter _aiDestinationSetter;
@@ -19,13 +19,17 @@ namespace Core.Enemies
 
         public void Start()
         {
+            InitializeHealthBehavior();
             OnObjectSpawn();
+        }
+
+        private void InitializeHealthBehavior()
+        {
+            health = new BaseHealthBehavior(enemyData.maxHealth, enemyData.maxHealth);
         }
 
         public void OnObjectSpawn()
         {
-            gameObject.GetComponent<Health.Health>().maxHealth = enemyData.maxHealth;
-            gameObject.GetComponent<Health.Health>().Restore();
             _aiDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
             _aiDestinationSetter.target = PlayerController.Instance.transform;
             gameObject.GetComponent<AIPath>().maxSpeed = enemyData.speed;
@@ -39,31 +43,5 @@ namespace Core.Enemies
             _animator.SetTrigger("Die");
         }
 
-        public void Hit()
-        {
-            _animator.SetTrigger("Hit");
-        }
-
-
-        /*public void OnCollisionStay2D(Collision2D other)
-        {
-            if (Time.time > lastAttackTime && other.gameObject.CompareTag("Player"))
-            {
-                lastAttackTime = Time.time + _attackCooldownTime;
-                _animator.SetTrigger("Attack");
-                Attack();
-            }
-        }*/
-
-
-        /*private void Attack()
-        {
-            PlayerController.Instance.DealDamage(enemyData.damage);
-        }*/
-
-        public void DestroySelf()
-        {
-            Destroy(gameObject);
-        }
     }
 }

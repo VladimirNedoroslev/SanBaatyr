@@ -40,12 +40,7 @@ namespace Core.Attack
         bool EnemyDetected()
         {
             hitEnemys = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-            
-            /*hitEnemys = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRange)
-                .Where(enemyCollider => enemyCollider.CompareTag("Enemy")
-                                        && enemyCollider.GetComponent<Enemy>().currentHealth >= 0).ToArray();*/
-            // я хз как указать несколько тэгов для атаки разных юнитов
-            
+
             if (hitEnemys.Length == 0)
                 return false;
             else
@@ -58,7 +53,7 @@ namespace Core.Attack
 
             foreach (Collider2D enemy in hitEnemys)
             {
-                enemy.GetComponent<Health.Health>().TakeDamage(attackDamage);
+                enemy.GetComponent<Health.BaseHealthBehavior>().TakeDamage(attackDamage);
             }
         }
 
