@@ -1,4 +1,4 @@
-﻿using Core.Enemies;
+﻿using Core.Health;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,7 +48,7 @@ namespace Core.Items.AntiVirus
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<Health.BaseHealthBehavior>().TakeDamage(damage);
+                other.GetComponent<BaseHealthBehavior>().GetDamage(damage);
             }
         }
     }

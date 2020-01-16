@@ -1,4 +1,5 @@
-﻿using Core.Health;
+﻿using System;
+using Core.Health;
 using UnityEngine;
 
 namespace Core.Attack
@@ -6,59 +7,54 @@ namespace Core.Attack
     public class MeleeAutoAttack : MonoBehaviour
     {
         private Animator _animator;
-
-        public Transform attackPoint;
-        public LayerMask enemyLayers;
-
+        private Transform _transform;
+        
         public float detectRange;
         public float attackRange;
 
-        public int attackDamage;
-        public float attackRate;
+        public int Damage;
+        public float AttackSpeed;
+        
+        private float _lastAttackTime;
+        private Collider2D[] _targets;
+        
+        private static readonly int AttackAnimation = Animator.StringToHash("Attack");
 
-        private float nextAttackTime = 0f;
-        private Collider2D[] hitEnemys;
-
-        // Update is called once per frame
-        void Update()
+        private void Start()
         {
-            if (Time.time >= nextAttackTime)
+            _lastAttackTime = int.MinValue;
+            _transform = gameObject.transform;
+        }
+
+        private void Update()
+        {
+            if (CanAttack() && HaveTargetsToAttack())
             {
-                if (EnemyDetected())
-                {
-                    Attack();
-                    nextAttackTime = Time.time + 1f / attackRate;
-                }
+                Attack();
             }
         }
 
-        bool EnemyDetected()
+        private bool CanAttack()
         {
-            hitEnemys = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            return Time.time >= _lastAttackTime + AttackSpeed;
+        }
 
-            if (hitEnemys.Length == 0)
-                return false;
-            else
-                return true;
+        bool HaveTargetsToAttack()
+        {
+            _targets = Physics2D.OverlapCircleAll(_transform.position, attackRange);
+            return _targets.Length > 0;
         }
 
         void Attack()
         {
-            _animator.SetTrigger("Attack");
-
-            foreach (Collider2D enemy in hitEnemys)
+            _animator.SetTrigger(AttackAnimation);
+            foreach (var target in _targets)
             {
-                enemy.GetComponent<BaseHealthBehavior>().GetDamage(attackDamage);
+                var targetHealth = target.GetComponent<BaseHealthBehavior>();
+                targetHealth.GetDamage(Damage);
             }
+            _lastAttackTime = Time.time;
         }
 
-        private void OnDrawGizmos()
-        {
-            if (attackPoint == null)
-                return;
-
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-            Gizmos.DrawWireSphere(attackPoint.position, detectRange);
-        }
     }
 }
