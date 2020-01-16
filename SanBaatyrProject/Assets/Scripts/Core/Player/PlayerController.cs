@@ -1,15 +1,11 @@
-﻿using System.Linq;
-using Core.Enemies;
-using Core.FloatingText;
+﻿using Core.Attack;
 using Core.Health;
-using Core.Attack;
-using Interfaces;
 using Prefabs.MetaObjects.GUIManager;
 using UnityEngine;
 
 namespace Core.Player
 {
-    public class PlayerController : Singleton<PlayerController>, IHealth
+    public class PlayerController : Singleton<PlayerController>
     {
         //public int maxHealth = 100;
         public float speed = 20;
@@ -19,13 +15,10 @@ namespace Core.Player
 
         private Animator _playerAnimator;
 
-        public float attack1Time;
-        public float attack2Time;
-        
 
         public void Start()
         {
-            gameObject.GetComponent<Health.BaseHealthBehavior>().Restore();
+            gameObject.GetComponent<BaseHealthBehavior>().Restore();
             _playerAnimator = Instance.transform.GetComponentInChildren<Animator>();
             spriteGroup = gameObject.transform.GetComponentsInChildren<SpriteRenderer>(true);
             InitializeAnimClipTimes();
@@ -39,10 +32,8 @@ namespace Core.Player
                 switch (clip.name)
                 {
                     case "Attack1":
-                        attack1Time = clip.length;
                         break;
                     case "Attack2":
-                        attack2Time = clip.length;
                         break;
                 }
             }

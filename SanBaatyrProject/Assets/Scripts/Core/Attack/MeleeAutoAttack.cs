@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Core.Enemies;
-using Core.Health;
+﻿using Core.Health;
 using UnityEngine;
 
 namespace Core.Attack
 {
     public class MeleeAutoAttack : MonoBehaviour
     {
-        public Animator animator;
+        private Animator _animator;
 
         public Transform attackPoint;
         public LayerMask enemyLayers;
@@ -49,11 +44,11 @@ namespace Core.Attack
 
         void Attack()
         {
-            animator.SetTrigger("Attack");
+            _animator.SetTrigger("Attack");
 
             foreach (Collider2D enemy in hitEnemys)
             {
-                enemy.GetComponent<Health.BaseHealthBehavior>().TakeDamage(attackDamage);
+                enemy.GetComponent<BaseHealthBehavior>().GetDamage(attackDamage);
             }
         }
 
