@@ -1,5 +1,8 @@
-﻿namespace Core.Health
+﻿using System;
+
+namespace Core.Health
 {
+    [Serializable]
     public class BaseHealthBehavior
     {
         public int MaxHealth;
@@ -9,6 +12,10 @@
         {
             CurrentHealth = currentHealth;
             MaxHealth = maxHealth;
+        }
+
+        public BaseHealthBehavior()
+        {
         }
 
         public virtual void GetDamage(int damage)
