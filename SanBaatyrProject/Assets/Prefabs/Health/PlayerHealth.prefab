@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c9e92ff2021fd45a12fd85ca953495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barTransform: {fileID: 315929572744019578}
+  healthBarTransform: {fileID: 315929572744019578}
 --- !u!1 &315929573438441604
 GameObject:
   m_ObjectHideFlags: 0

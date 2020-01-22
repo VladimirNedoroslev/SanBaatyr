@@ -1,82 +1,48 @@
-﻿using Core.Attack;
+﻿using System;
+using Core.Attack;
+using Core.Delegates;
 using Core.Health;
-using Prefabs.MetaObjects.GUIManager;
+using Core.Managers;
 using UnityEngine;
 
 namespace Core.Player
 {
-    public class PlayerController : Singleton<PlayerController>
+    public class PlayerController : MonoBehaviour
     {
-        //public int maxHealth = 100;
         public float speed = 20;
-        //public int currentHealth = 100;
-
-        public SpriteRenderer[] spriteGroup;
-
+        public BaseHealthBehavior health;
+        
+        private SpriteRenderer[] _spriteGroup;
         private Animator _playerAnimator;
 
-
-        public void Start()
+        public static event NoParameterDelegate OnPlayerDeath;
+        
+        public void Awake()
         {
-            gameObject.GetComponent<BaseHealthBehavior>().Restore();
-            _playerAnimator = Instance.transform.GetComponentInChildren<Animator>();
-            spriteGroup = gameObject.transform.GetComponentsInChildren<SpriteRenderer>(true);
-            InitializeAnimClipTimes();
+            _playerAnimator = GetComponentInChildren<Animator>();
+            _spriteGroup = GetComponentsInChildren<SpriteRenderer>(true);
+            health = new BaseHealthBehavior(10,10);
         }
 
-        private void InitializeAnimClipTimes()
+        private void OnEnable()
         {
-            var clips = _playerAnimator.runtimeAnimatorController.animationClips;
-            foreach (var clip in clips)
-            {
-                switch (clip.name)
-                {
-                    case "Attack1":
-                        break;
-                    case "Attack2":
-                        break;
-                }
-            }
+            OnPlayerDeath += GUIManager.Instance.ShowGameOverScreen;
         }
+
+        private void OnDisable()
+        {
+            OnPlayerDeath -= GUIManager.Instance.ShowGameOverScreen;
+        }
+
 
         public void Update()
         {
             _playerAnimator.SetFloat("MoveSpeed", speed * 0.1f);
-        }
-
-
-        public int sortingOrder;
-        public int sortingOrderOrigin;
-
-        private float _updateTic;
-
-        private void spriteOrder_Controller()
-        {
-            _updateTic += Time.deltaTime;
-
-            if (_updateTic > 0.1f)
+            if (health.IsDead())
             {
-                sortingOrder = Mathf.RoundToInt(gameObject.transform.position.y * 100);
-                for (int i = 0; i < spriteGroup.Length; i++)
-                {
-                    spriteGroup[i].sortingOrder = sortingOrderOrigin - sortingOrder;
-                }
-
-                _updateTic = 0;
+                OnPlayerDeath?.Invoke();
             }
         }
-
-        public void Die()
-        {
-            gameObject.GetComponent<MeleeAutoAttack>().enabled = false;
-            Time.timeScale = 0f;
-            GUIManager.Instance.ShowGameOverScreen();
-            _playerAnimator.SetTrigger("Die");
-        }
-
-        public void GetDamage()
-        {
-            _playerAnimator.SetTrigger("Hit");
-        }
+        
     }
 }
