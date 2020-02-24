@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Core.Health;
+using Core.Interfaces;
 using Core.Player;
-using Core.Health;
 using Core.ScriptableObjects;
-using Interfaces;
 using Pathfinding;
 using UnityEngine;
 
@@ -10,24 +9,30 @@ namespace Core.Enemies
 {
     public class BaseVirusController : MonoBehaviour, IPooledObject
     {
-        public EnemyData enemyData;
+        [SerializeField] public EnemyData enemyData;
+        [SerializeField] public PlayerController player;
         public BaseHealthBehavior health;
-        public PlayerController player;
 
-        private Animator _animator;
-        private float _attackCooldownTime = 1.0f;
-
-        public void Start()
+        private void Start()
         {
             health = new BaseHealthBehavior(enemyData.maxHealth, enemyData.maxHealth);
-            OnObjectSpawn();
+            gameObject.GetComponent<AIPath>().maxSpeed = enemyData.speed;
+            gameObject.GetComponent<AIDestinationSetter>().target = player.transform;
         }
+
+        private void Update()
+        {
+            if (health.IsDead())
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        public bool ActivateOnSpawn => true;
 
         public void OnObjectSpawn()
         {
-//            gameObject.GetComponent<AIPath>().maxSpeed = enemyData.speed;
-            _animator = gameObject.GetComponent<Animator>();
+            player = PlayerController.Instance;
         }
-
     }
 }

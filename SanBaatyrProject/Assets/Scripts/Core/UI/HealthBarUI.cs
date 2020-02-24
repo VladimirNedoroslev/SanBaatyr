@@ -1,4 +1,5 @@
 ﻿using Core.Health;
+using Core.Player;
 using UnityEngine;
 
 namespace Core.UI
@@ -7,12 +8,13 @@ namespace Core.UI
     public class HealthBarUI : MonoBehaviour
     {
         [SerializeField] private Transform healthBarTransform;
+        [SerializeField] private GameObject player;
         private BaseHealthBehavior _health;
-        private const float NormalizedHealthMultiplier = 0.01f;
+        private float _normalizedHealthMultiplier;
 
         private void Start()
         {
-            _health = gameObject.GetComponentInParent<BaseHealthBehavior>();
+            _health = player.GetComponent<PlayerController>().health;
         }
 
         private void FixedUpdate()
@@ -23,7 +25,7 @@ namespace Core.UI
             }
             else
             {
-                SetSize(_health.CurrentHealth * NormalizedHealthMultiplier);
+                SetSize((float)_health.CurrentHealth / _health.MaxHealth);
             }
         }
 

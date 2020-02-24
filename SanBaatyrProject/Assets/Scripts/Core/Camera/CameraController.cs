@@ -6,19 +6,19 @@ namespace Core.Camera
     public class CameraController : MonoBehaviour
     {
         private Vector3 _offset;
-        private PlayerController _playerController;
+        public PlayerController player;
 
-        // Start is called before the first frame update
-        void Start()
+        private Transform _playerTransform;
+
+        private void Start()
         {
-            _offset = transform.position - PlayerController.Instance.transform.position;
-            _playerController = PlayerController.Instance;
+            _playerTransform = player.transform;
+            _offset = transform.position - _playerTransform.position;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            transform.position = _playerController.transform.position + _offset;
+            transform.position = _playerTransform.position + _offset;
         }
     }
 }

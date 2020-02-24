@@ -1,35 +1,30 @@
-﻿using Core.Player;
-using Pathfinding;
+﻿using Pathfinding;
 using UnityEngine;
 
 namespace Core.Enemies
 {
     public class VisionLimit : MonoBehaviour
     {
-        private float _visionRadius = 1;
+        public float visionRadius = 1;
+
+        private BaseVirusController _virus;
         private Transform _playerTransform;
         private AIDestinationSetter _aiDestinationSetter;
 
         private void Start()
         {
+            _virus = GetComponent<BaseVirusController>();
+            _playerTransform = _virus.player.transform;
             _aiDestinationSetter = gameObject.GetComponent<AIDestinationSetter>();
-            _playerTransform = PlayerController.Instance.transform;
-            _visionRadius = gameObject.GetComponent<BaseVirus>().enemyData.visionDistance;
+
+            visionRadius = _virus.enemyData.visionDistance;
         }
 
 
         void Update()
         {
-            var distance = Vector2.Distance(_playerTransform.position, transform.position);
-
-            if (distance > _visionRadius)
-            {
-                _aiDestinationSetter.enabled = false;
-            }
-            else if (!_aiDestinationSetter.enabled)
-            {
-                _aiDestinationSetter.enabled = true;
-            }
+            var distanceToPlayer = Vector2.Distance(_playerTransform.position, transform.position);
+            _aiDestinationSetter.enabled = distanceToPlayer <= visionRadius;
         }
     }
 }

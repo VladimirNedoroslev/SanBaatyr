@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Prefabs.MetaObjects.GUIManager
+namespace Core.Managers
 {
     public class GUIManager : Singleton<GUIManager>
     {
@@ -9,6 +9,7 @@ namespace Prefabs.MetaObjects.GUIManager
         public void ShowGameOverScreen()
         {
             gameOverPanel.SetActive(true);
+            Debug.Log("Player is dead");
             gameOverPanel.GetComponent<Animator>().SetBool("Start", true);
             Time.timeScale = 1f;
         }

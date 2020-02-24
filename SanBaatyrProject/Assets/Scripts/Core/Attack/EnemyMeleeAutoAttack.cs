@@ -1,6 +1,7 @@
 ﻿using Core.Enemies;
 using Core.Health;
 using Core.Player;
+using Core.Utilities;
 using UnityEngine;
 
 namespace Core.Attack
@@ -47,7 +48,6 @@ namespace Core.Attack
 
         private bool IsPlayerInAttackRange()
         {
-
             return Vector2.Distance(_playerTransform.position, _transform.position) < AttackRange;
         }
 
