@@ -2,6 +2,7 @@
 using Core.Health;
 using Core.Player;
 using Core.Utilities;
+using Pathfinding;
 using UnityEngine;
 
 namespace Core.Attack
@@ -18,8 +19,9 @@ namespace Core.Attack
         private PlayerController _player;
         private Transform _playerTransform;
         private BaseHealthBehavior _playerHealth;
+        private AIPath _aiPath;
 
-        private static readonly float AttackRange = 1f;
+        private static readonly float AttackRange = 1.5f;
 
         private void Start()
         {
@@ -30,14 +32,14 @@ namespace Core.Attack
             _player = GetComponent<BaseVirusController>().player;
             _playerTransform = _player.GetComponent<Transform>();
             _playerHealth = _player.health;
+            _aiPath = gameObject.GetComponent<AIPath>();
         }
 
         private void Update()
         {
             if (CanAttack() && IsPlayerInAttackRange())
             {
-                Debug.Log("Attack");
-                Attack();
+                StartAttackAnimation();
             }
         }
 
@@ -51,15 +53,20 @@ namespace Core.Attack
             return Vector2.Distance(_playerTransform.position, _transform.position) < AttackRange;
         }
 
-        void Attack()
+        void StartAttackAnimation()
         {
             _animator.SetTrigger(Animations.Attack);
+            _aiPath.canMove = false;
             _lastAttackTime = Time.time;
         }
 
         void EndAttack()
         {
-            _playerHealth.GetDamage(damage);
+            if (IsPlayerInAttackRange())
+            {
+                _playerHealth.GetDamage(damage);
+            }
+            _aiPath.canMove = true;
         }
     }
 }

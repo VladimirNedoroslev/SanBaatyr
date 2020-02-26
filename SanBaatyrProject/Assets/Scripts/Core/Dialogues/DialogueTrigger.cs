@@ -1,36 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Prefabs.Dialogues
+namespace Core.Dialogues
 {
     public class DialogueTrigger : MonoBehaviour
     {
-        public Dialogue dialogue;
+        [SerializeField]private DialogueManager dialogueManager;
+        [SerializeField] private List<CharacterSpeech> dialogue;
+        private float _lastActivationTime;
+        
+        public static readonly float DialogueCooldown = 5f;
+
+        private void Start()
+        {
+            _lastActivationTime = int.MinValue;
+        }
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            if (isPlayer(other))
+            if (IsPlayer(other) && CanStartDialogue())
             {
-                StartDialogue();
-
-                gameObject.SetActive(false);
+                Debug.Log("START");
+                dialogueManager.StartDialogue(dialogue);
+                _lastActivationTime = Time.time;
             }
         }
 
-        public void StartDialogue()
-        {
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-        }
 
-        private bool isPlayer(Collider2D player)
-        {
-            if (player.tag == "Player")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        private bool IsPlayer(Collider2D player) => player.CompareTag("Player");
+        private bool CanStartDialogue() => Time.time > _lastActivationTime + DialogueCooldown;
     }
 }

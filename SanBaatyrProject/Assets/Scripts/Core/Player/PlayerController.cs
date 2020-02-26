@@ -1,6 +1,5 @@
 ﻿using Core.Delegates;
 using Core.Health;
-using Core.Managers;
 using UnityEngine;
 
 namespace Core.Player
