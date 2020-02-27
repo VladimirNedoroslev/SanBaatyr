@@ -1,13 +1,11 @@
-﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Dialogue
+namespace Core.Dialogues
 {
-    public Sprite image;
-    
-    public string name;
-    
-    [TextArea(3, 10)]
-    public string[] sentences;
+    [CreateAssetMenu(menuName = "New dialogue", fileName ="NewDialogue")]
+    public class Dialogue : ScriptableObject
+    {
+        public List<CharacterSpeech> speeches;
+    }
 }

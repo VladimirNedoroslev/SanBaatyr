@@ -1,54 +1,57 @@
-﻿using Core.Enemies;
+﻿using System.Collections;
+using Core.Enemies;
+using Core.Interfaces;
+using Core.Utilities;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Core.Items.AntiVirus
 {
-    public class AntiVirusWave : MonoBehaviour
+    public class AntiVirusWave : MonoBehaviour, IPooledObject
     {
-        public Image cooldownEffect;
-        
         public int damage;
         public float cooldownTime;
 
         private Animator _animator;
-        private CircleCollider2D _circleCollider2D;
 
-        private void Start()
+        private float _lastActivationTime = int.MinValue;
+
+
+        private void Awake()
         {
             _animator = gameObject.GetComponent<Animator>();
-            _circleCollider2D = gameObject.GetComponent<CircleCollider2D>();
+            _lastActivationTime = int.MinValue;
         }
 
-        private float _lastActivationTime;
-        private void Update()
+        public bool ActivateOnSpawn => false;
+
+        public void OnObjectSpawn()
         {
-            if (Time.time < _lastActivationTime + cooldownTime)
+            if (CanBeUsed())
             {
-                cooldownEffect.fillAmount = (_lastActivationTime + cooldownTime) / Time.time;
+                gameObject.SetActive(true);
+                _animator.SetTrigger(Animations.StartWave);
+                _lastActivationTime = Time.time;
+                StartCoroutine(DisableAfterAnimation());
             }
-            else
-            {
-                enabled = false;
-                cooldownEffect.gameObject.SetActive(false);
-                cooldownEffect.fillAmount = 1;
-            }
-            
         }
 
-        public void InitializeWave()
+        private IEnumerator DisableAfterAnimation()
         {
-            _animator.SetTrigger("StartWave");
-            _circleCollider2D.enabled = true;
-            _lastActivationTime = Time.time;
-            cooldownEffect.gameObject.SetActive(true);
+            var animatorClipInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            yield return new WaitForSeconds(animatorClipInfo.length);
+            gameObject.SetActive(false);
+        }
+
+        private bool CanBeUsed()
+        {
+            return Time.time > _lastActivationTime + cooldownTime;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<Health.Health>().TakeDamage(damage);
+                other.GetComponent<BaseVirusController>().health.GetDamage(damage);
             }
         }
     }

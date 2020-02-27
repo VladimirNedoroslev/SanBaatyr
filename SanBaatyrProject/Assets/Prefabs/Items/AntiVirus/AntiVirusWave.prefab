@@ -109,7 +109,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6967538560035255651}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -130,6 +130,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46831804e124f8847aa5a9723b7583d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownEffect: {fileID: 0}
   damage: 100
   cooldownTime: 5

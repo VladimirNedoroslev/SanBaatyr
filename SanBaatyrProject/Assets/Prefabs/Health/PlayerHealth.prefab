@@ -109,7 +109,7 @@ Transform:
   m_Children:
   - {fileID: 315929573438441607}
   m_Father: {fileID: 315929573313406272}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &315929573313406273
 GameObject:
@@ -139,9 +139,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6373321836267536896}
-  - {fileID: 315929571835171728}
   - {fileID: 315929572744019578}
+  - {fileID: 315929571835171728}
+  - {fileID: 6373321836267536896}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,7 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c9e92ff2021fd45a12fd85ca953495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barTransform: {fileID: 315929572744019578}
+  healthBarTransform: {fileID: 315929572744019578}
+  player: {fileID: 0}
 --- !u!1 &315929573438441604
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,10 +265,10 @@ Transform:
   m_GameObject: {fileID: 5628815779037748836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.5, y: 1.3, z: 1}
+  m_LocalScale: {x: 10.500001, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 315929573313406272}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8924330765908536621
 SpriteRenderer:
