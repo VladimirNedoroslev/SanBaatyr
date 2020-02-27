@@ -21,12 +21,11 @@ namespace Core.Dialogues
         
         public bool isDialogueActive = false;
 
-        public void StartDialogue(List<CharacterSpeech> dialogue)
+        public void StartDialogue(Dialogue dialogue)
         {
             isDialogueActive = true;
-//            Time.timeScale = 0f;
             OnDialogueStart();
-            _speeches = new Queue<CharacterSpeech>(dialogue);
+            _speeches = new Queue<CharacterSpeech>(dialogue.speeches);
             OnSpeechChange(_speeches.Dequeue());
         }
 

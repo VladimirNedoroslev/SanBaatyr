@@ -32,7 +32,7 @@ namespace Core.UI.Dialogues
 
         public void StartDialogue()
         {
-            Debug.Log("Im active!");
+            Time.timeScale = 0f;
             dialogueBox.SetActive(true);
         }
 

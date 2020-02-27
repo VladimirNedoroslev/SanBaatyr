@@ -6,7 +6,7 @@ namespace Core.Dialogues
     public class DialogueTrigger : MonoBehaviour
     {
         [SerializeField]private DialogueManager dialogueManager;
-        [SerializeField] private List<CharacterSpeech> dialogue;
+        [SerializeField] private Dialogue dialogue;
         private float _lastActivationTime;
         
         public static readonly float DialogueCooldown = 5f;
