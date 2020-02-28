@@ -30,7 +30,7 @@ namespace Core.UI.Dialogues
             dialogueManager.NextPhrase();
         }
 
-        public void StartDialogue()
+        private void StartDialogue()
         {
             Time.timeScale = 0f;
             dialogueBox.SetActive(true);
@@ -51,6 +51,7 @@ namespace Core.UI.Dialogues
 
         private void EndDialogue()
         {
+            Time.timeScale = 1f;
             dialogueBox.SetActive(false);
         }
     }

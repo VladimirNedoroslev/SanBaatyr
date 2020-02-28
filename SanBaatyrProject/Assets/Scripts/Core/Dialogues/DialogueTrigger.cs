@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Core.Dialogues
 {
     public class DialogueTrigger : MonoBehaviour
     {
-        [SerializeField]private DialogueManager dialogueManager;
+        [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private Dialogue dialogue;
         private float _lastActivationTime;
-        
+
         public static readonly float DialogueCooldown = 5f;
 
         private void Start()

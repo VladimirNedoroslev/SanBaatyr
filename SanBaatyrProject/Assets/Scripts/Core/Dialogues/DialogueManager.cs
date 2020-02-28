@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core.Dialogues
@@ -19,11 +20,13 @@ namespace Core.Dialogues
         public event DialogueActivationEvent DialogueEnd;
         public event DialogueActivationEvent DialogueStart;
         
-        public bool isDialogueActive = false;
 
         public void StartDialogue(Dialogue dialogue)
         {
-            isDialogueActive = true;
+            if (!dialogue.IsValid())
+            {
+                throw new ArgumentException($"Dialogue is not valid, please check {dialogue.Name} dialogue object!");
+            }
             OnDialogueStart();
             _speeches = new Queue<CharacterSpeech>(dialogue.speeches);
             OnSpeechChange(_speeches.Dequeue());
@@ -41,7 +44,6 @@ namespace Core.Dialogues
             }
             else
             {
-                isDialogueActive = false;
                 OnDialogueEnd();
             }
         }
@@ -60,13 +62,11 @@ namespace Core.Dialogues
 
         protected virtual void OnDialogueEnd()
         {
-            Time.timeScale = 1f;
             DialogueEnd?.Invoke();
         }
 
         protected virtual void OnDialogueStart()
         {
-            Debug.Log("Started dialogue");
             DialogueStart?.Invoke();
         }
     }
