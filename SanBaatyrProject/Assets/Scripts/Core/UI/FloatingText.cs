@@ -26,7 +26,7 @@ namespace Core.UI
             gameObject.SetActive(false);
         }
 
-        public void SetText(string text, Color color)
+        private void SetText(string text, Color color)
         {
             _damageText.text = text;
             _damageText.color = color;
