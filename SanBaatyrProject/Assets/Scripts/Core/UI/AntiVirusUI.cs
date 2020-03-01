@@ -24,7 +24,7 @@ namespace Core.UI
         public void ActivateAntivirus()
         {
             var antiVirus = ObjectPooler.Instance.SpawnFromPool("AntiVirus", player.transform.position, Quaternion.identity);
-            var cooldownTime = antiVirus.GetComponent<AntiVirusWave>().cooldownTime;
+            var cooldownTime = antiVirus.GetComponent<AntiVirusController>().cooldownTime;
             cooldownEffect.StartCooldownAnimation(cooldownTime);
             StartCoroutine(DeactivateButtonDuringCooldown(cooldownTime));
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.Items.AntiVirus
 {
-    public class AntiVirusWave : MonoBehaviour, IPooledObject
+    public class AntiVirusController : MonoBehaviour, IPooledObject
     {
         public int damage;
         public float cooldownTime;

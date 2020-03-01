@@ -1,24 +1,30 @@
-﻿using UnityEngine;
+﻿using Core.UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGamePanel : MonoBehaviour
+namespace SanBaatyr.UI.Episode1
 {
-    public GameObject mainMenuPanel;
-
-
-    public void GoToMainMenu()
+    public class StartGamePanel : MonoBehaviour
     {
-        mainMenuPanel.SetActive(true);
-        gameObject.SetActive(false);
-    }
+        public GameObject mainMenuPanel;
+        public LoadingSceneController LoadingSceneController;
 
-    public void StartEpisode1()
-    {
-        SceneManager.LoadScene("Episode1");
-    }
 
-    public void StartEpisode2()
-    {
-        SceneManager.LoadScene("Episode2");
+        public void GoToMainMenu()
+        {
+            mainMenuPanel.SetActive(true);
+            gameObject.SetActive(false);
+        }
+
+        public void StartEpisode1()
+        {
+            gameObject.SetActive(false);
+            LoadingSceneController.LoadScene(SceneNames.VladimirTestScene);
+        }
+
+        public void StartEpisode2()
+        {
+            SceneManager.LoadScene("Episode2");
+        }
     }
 }

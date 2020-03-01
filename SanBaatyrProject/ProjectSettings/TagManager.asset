@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - Canvas
   - Joystick
+  - Trojan
   layers:
   - Default
   - TransparentFX
