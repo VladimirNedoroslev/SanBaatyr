@@ -6,13 +6,16 @@ namespace Core.Dialogues
     {
         [SerializeField] private DialogueManager dialogueManager;
         [SerializeField] private Dialogue dialogue;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         private float _lastActivationTime;
+        private bool _hasBeenActivated;
 
-        public static readonly float DialogueCooldown = 5f;
+        public float DialogueCooldown = 5f;
 
         private void Start()
         {
-            _lastActivationTime = int.MinValue;
+            dialogueManager.DialogueEnd += GreyOutTriggerSprite;
+            _lastActivationTime = Time.time - DialogueCooldown;
         }
 
         public void OnTriggerEnter2D(Collider2D other)
@@ -22,7 +25,17 @@ namespace Core.Dialogues
                 Debug.Log("START");
                 dialogueManager.StartDialogue(dialogue);
                 _lastActivationTime = Time.time;
+                if (!_hasBeenActivated)
+                {
+                    _hasBeenActivated = true;
+                    GreyOutTriggerSprite();
+                }
             }
+        }
+
+        private void GreyOutTriggerSprite()
+        {
+            spriteRenderer.color = Color.gray;
         }
 
 

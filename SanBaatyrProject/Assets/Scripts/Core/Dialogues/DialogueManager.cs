@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Delegates;
 using UnityEngine;
 
 namespace Core.Dialogues
@@ -16,9 +17,8 @@ namespace Core.Dialogues
         public delegate void PhraseChangeEvent(string nextPhrase);
         public event PhraseChangeEvent PhraseChange;
 
-        public delegate void DialogueActivationEvent();
-        public event DialogueActivationEvent DialogueEnd;
-        public event DialogueActivationEvent DialogueStart;
+        public event NoParameterDelegate DialogueEnd;
+        public event NoParameterDelegate DialogueStart;
         
 
         public void StartDialogue(Dialogue dialogue)

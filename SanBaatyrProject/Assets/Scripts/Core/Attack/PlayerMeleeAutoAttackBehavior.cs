@@ -1,22 +1,23 @@
 ﻿using System.Linq;
+using Core.Delegates;
 using Core.Enemies;
-using Core.Extensions;
 using Core.Utilities;
 using UnityEngine;
 
 namespace Core.Attack
 {
-    public class PlayerMeleeAutoAttack : MonoBehaviour
+    public class PlayerMeleeAutoAttackBehavior : MonoBehaviour
     {
-        private Animator _animator;
+        [SerializeField] private Animator _animator;
 
         public float attackRange;
-
         public int damage;
         public float attackSpeed;
 
         private float _lastAttackTime;
         private Collider2D[] _targets;
+        
+        public event IntParameterDelegate EnemyAttack;
 
         private void Start()
         {
@@ -50,7 +51,7 @@ namespace Core.Attack
             _lastAttackTime = Time.time;
         }
 
-        void EndAttack()
+        void DealDamageToEnemies()
         {
             _targets = Physics2D.OverlapCircleAll(transform.position, attackRange);
             foreach (var target in _targets)
@@ -60,17 +61,14 @@ namespace Core.Attack
                     var enemy = target.GetComponent<BaseVirusController>();
                     enemy.GetComponent<Animator>().SetTrigger(Animations.GetHit);
                     enemy.health.GetDamage(damage);
-                    InitializePopUpText(target);
+                    OnEnemyAttack(damage);
                 }
             }
         }
 
-        private void InitializePopUpText(Collider2D target)
+        protected virtual void OnEnemyAttack(int damage)
         {
-            var popUpTextPosition = target.transform.position.Randomize(0, 1f);
-            var popUpText =
-                ObjectPooler.Instance.SpawnFromPool(ObjectPoolerTags.PopUpText, popUpTextPosition, Quaternion.identity);
-            popUpText.GetComponent<FloatingText.FloatingText>().SetText(damage.ToString(), Color.red);
+            EnemyAttack?.Invoke(damage);
         }
     }
 }

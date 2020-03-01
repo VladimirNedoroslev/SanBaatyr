@@ -5,13 +5,13 @@ namespace Core.Health
     [Serializable]
     public class BaseHealthBehavior
     {
-        public int MaxHealth;
-        public int CurrentHealth;
+        public int maxHealth;
+        public int currentHealth;
 
         public BaseHealthBehavior(int currentHealth, int maxHealth)
         {
-            CurrentHealth = currentHealth;
-            MaxHealth = maxHealth;
+            this.currentHealth = currentHealth;
+            this.maxHealth = maxHealth;
         }
 
         public BaseHealthBehavior()
@@ -20,41 +20,41 @@ namespace Core.Health
 
         public virtual void GetDamage(int damage)
         {
-            if (damage > CurrentHealth)
+            if (damage > currentHealth)
             {
-                CurrentHealth = 0;
+                currentHealth = 0;
             }
             else
             {
-                CurrentHealth -= damage;
+                currentHealth -= damage;
             }
         }
 
         public virtual void Heal(int healPoints)
         {
-            if (CurrentHealth + healPoints > MaxHealth)
+            if (currentHealth + healPoints > maxHealth)
             {
-                CurrentHealth = MaxHealth;
+                currentHealth = maxHealth;
             }
             else
             {
-                CurrentHealth += healPoints;
+                currentHealth += healPoints;
             }
         }
 
         public virtual bool IsDead()
         {
-            return CurrentHealth <= 0;
+            return currentHealth <= 0;
         }
 
         public virtual void Restore()
         {
-            CurrentHealth = MaxHealth;
+            currentHealth = maxHealth;
         }
 
         public virtual void Kill()
         {
-            CurrentHealth = 0;
+            currentHealth = 0;
         }
     }
 }

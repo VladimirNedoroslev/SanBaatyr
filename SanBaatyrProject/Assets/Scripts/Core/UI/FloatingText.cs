@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using Core.Extensions;
 using Core.Interfaces;
+using Core.Utilities;
 using TMPro;
 using UnityEngine;
 
-namespace Core.FloatingText
+namespace Core.UI
 {
     public class FloatingText : MonoBehaviour, IPooledObject
     {
@@ -33,6 +35,14 @@ namespace Core.FloatingText
         public bool ActivateOnSpawn => true;
         public void OnObjectSpawn()
         {
+        }
+        
+        public static void InitializePopUpText(Transform transform, string text, Color color)
+        {
+            var popUpTextPosition = transform.position.Randomize();
+            var popUpText =
+                ObjectPooler.Instance.SpawnFromPool(ObjectPoolerTags.PopUpText, popUpTextPosition, Quaternion.identity);
+            popUpText.GetComponent<FloatingText>().SetText(text, color);
         }
     }
 }

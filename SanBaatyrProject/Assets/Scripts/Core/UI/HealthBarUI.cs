@@ -25,7 +25,7 @@ namespace Core.UI
             }
             else
             {
-                SetSize((float)_health.CurrentHealth / _health.MaxHealth);
+                SetSize((float)_health.currentHealth / _health.maxHealth);
             }
         }
 
