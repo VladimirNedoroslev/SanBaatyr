@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core.Utilities;
+using UnityEngine;
 
 namespace Core.Dialogues
 {
@@ -20,7 +21,7 @@ namespace Core.Dialogues
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsPlayer(other) && CanStartDialogue())
+            if (other.IsPlayer() && CanStartDialogue())
             {
                 Debug.Log("START");
                 dialogueManager.StartDialogue(dialogue);
@@ -39,7 +40,6 @@ namespace Core.Dialogues
         }
 
 
-        private bool IsPlayer(Collider2D player) => player.CompareTag("Player");
         private bool CanStartDialogue() => Time.time > _lastActivationTime + DialogueCooldown;
     }
 }

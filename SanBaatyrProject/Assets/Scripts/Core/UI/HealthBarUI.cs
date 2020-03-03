@@ -9,23 +9,23 @@ namespace Core.UI
     {
         [SerializeField] private Transform healthBarTransform;
         [SerializeField] private GameObject player;
-        private BaseHealthBehavior _health;
+        private BaseHealthBehavior _playerHealth;
         private float _normalizedHealthMultiplier;
 
         private void Start()
         {
-            _health = player.GetComponent<PlayerController>().health;
+            _playerHealth = player.GetComponent<PlayerController>().health;
         }
 
         private void FixedUpdate()
         {
-            if (_health.IsDead())
+            if (_playerHealth.IsDead())
             {
                 gameObject.SetActive(false);
             }
             else
             {
-                SetSize((float)_health.currentHealth / _health.maxHealth);
+                SetSize((float)_playerHealth.currentHealth / _playerHealth.maxHealth);
             }
         }
 

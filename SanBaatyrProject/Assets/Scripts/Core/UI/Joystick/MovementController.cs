@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.UI.Joystick
 {
-    public class JoystickController : MonoBehaviour
+    public class MovementController : MonoBehaviour
     {
         public PlayerController player;
         public VariableJoystick variableJoystick;
@@ -13,7 +13,7 @@ namespace Core.UI.Joystick
         private Animator _animator;
 
         //Used for appropriate move speed
-        private const float SpeedMultiplier = 10000;
+        public float speedMultiplier = 10000;
 
 
         private Vector3 _facingRightLocale;
@@ -52,7 +52,7 @@ namespace Core.UI.Joystick
                 transform.localScale = _facingLeftLocale;
             }
 
-            _rigidBody2D.AddForce(_speed * SpeedMultiplier * Time.fixedDeltaTime * direction, ForceMode2D.Force);
+            _rigidBody2D.AddForce(_speed * speedMultiplier * Time.fixedDeltaTime * direction, ForceMode2D.Force);
         }
     }
 }

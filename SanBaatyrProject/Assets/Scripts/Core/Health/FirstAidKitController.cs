@@ -1,5 +1,6 @@
 ﻿using Core.Delegates;
 using Core.Player;
+using Core.Utilities;
 using UnityEngine;
 
 namespace Core.Health
@@ -12,16 +13,14 @@ namespace Core.Health
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (IsPlayer(other))
+            if (other.IsPlayer())
             {
                 other.GetComponent<PlayerController>().health.Heal(healPoints);
                 OnPlayerHealed(healPoints);
                 Destroy(gameObject);
             }
         }
-
-        private bool IsPlayer(Collider2D player) => player.CompareTag("Player");
-
+        
         protected virtual void OnPlayerHealed(int damage)
         {
             PlayerHealed?.Invoke(damage);

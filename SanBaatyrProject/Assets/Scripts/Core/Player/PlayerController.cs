@@ -9,7 +9,6 @@ namespace Core.Player
         public float speed = 20;
         public BaseHealthBehavior health;
 
-        private SpriteRenderer[] _spriteGroup;
         private Animator _playerAnimator;
 
         public static event NoParameterDelegate OnPlayerDeath;
@@ -19,7 +18,6 @@ namespace Core.Player
         public void Awake()
         {
             _playerAnimator = GetComponentInChildren<Animator>();
-            _spriteGroup = GetComponentsInChildren<SpriteRenderer>(true);
             health = new BaseHealthBehavior(500, 500);
             Instance = this;
         }
