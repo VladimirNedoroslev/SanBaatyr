@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7791174866577026960}
   - component: {fileID: 7791174866577026961}
   - component: {fileID: 7791174866577026958}
-  - component: {fileID: 7791174866577026963}
+  - component: {fileID: 3670352223942775572}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -85,7 +85,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7791174866577026959}
   m_Enabled: 1
---- !u!114 &7791174866577026963
+--- !u!114 &3670352223942775572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7791174866577026959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc96b455e5066e47aad317b91f2b753, type: 3}
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &573296698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105,10 +126,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7791174866577026960}
     m_Modifications:
-    - target: {fileID: 315929573313406273, guid: 47781f512be71a848b5d6169b7c28dfd,
+    - target: {fileID: 315929572744019578, guid: 47781f512be71a848b5d6169b7c28dfd,
         type: 3}
-      propertyPath: m_Name
-      value: PlayerHealth
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 315929573313406272, guid: 47781f512be71a848b5d6169b7c28dfd,
         type: 3}
@@ -180,14 +201,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.35
       objectReference: {fileID: 0}
+    - target: {fileID: 315929573313406273, guid: 47781f512be71a848b5d6169b7c28dfd,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerHealth
+      objectReference: {fileID: 0}
     - target: {fileID: 5628815779037748836, guid: 47781f512be71a848b5d6169b7c28dfd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 315929572744019578, guid: 47781f512be71a848b5d6169b7c28dfd,
-        type: 3}
-      propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7865969915732611191, guid: 47781f512be71a848b5d6169b7c28dfd,
