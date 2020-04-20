@@ -1,4 +1,4 @@
-﻿using Core.Delegates;
+﻿using System;
 using Core.Health;
 using UnityEngine;
 
@@ -11,10 +11,10 @@ namespace Core.Player
 
         private Animator _playerAnimator;
 
-        public static event NoParameterDelegate OnPlayerDeath;
+        public static event Action OnPlayerDeath;
 
         public static PlayerController Instance;
-        
+
         public void Awake()
         {
             _playerAnimator = GetComponentInChildren<Animator>();

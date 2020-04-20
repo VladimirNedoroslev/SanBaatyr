@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Core.Delegates;
+﻿using System;
+using System.Linq;
 using Core.Enemies;
 using Core.Utilities;
 using UnityEngine;
@@ -16,8 +16,8 @@ namespace Core.Attack
 
         private float _lastAttackTime;
         private Collider2D[] _targets;
-        
-        public event IntParameterDelegate EnemyAttack;
+
+        public event Action<int> EnemyAttack;
 
         private void Start()
         {

@@ -1,4 +1,4 @@
-﻿using Core.Delegates;
+﻿using System;
 using Core.Player;
 using Core.Utilities;
 using UnityEngine;
@@ -9,8 +9,8 @@ namespace Core.Health
     {
         [SerializeField] private int healPoints = 10;
 
-        public static event IntParameterDelegate PlayerHealed;
-        
+        public static event Action<int> PlayerHealed;
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.IsPlayer())
@@ -20,7 +20,7 @@ namespace Core.Health
                 Destroy(gameObject);
             }
         }
-        
+
         protected virtual void OnPlayerHealed(int damage)
         {
             PlayerHealed?.Invoke(damage);

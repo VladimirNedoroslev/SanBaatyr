@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Delegates;
 using UnityEngine;
 
 namespace Core.Dialogues
 {
     public class DialogueManager : MonoBehaviour
     {
-
         private Queue<CharacterSpeech> _speeches;
         private Queue<string> _phrases;
 
         public delegate void SpeechChangeEvent(CharacterSpeech characterSpeech);
+
         public event SpeechChangeEvent SpeechChange;
 
         public delegate void PhraseChangeEvent(string nextPhrase);
+
         public event PhraseChangeEvent PhraseChange;
 
-        public event NoParameterDelegate DialogueEnd;
-        public event NoParameterDelegate DialogueStart;
-        
+        public event Action DialogueEnd;
+        public event Action DialogueStart;
+
 
         public void StartDialogue(Dialogue dialogue)
         {
@@ -27,6 +27,7 @@ namespace Core.Dialogues
             {
                 throw new ArgumentException($"Dialogue is not valid, please check {dialogue.Name} dialogue object!");
             }
+
             OnDialogueStart();
             _speeches = new Queue<CharacterSpeech>(dialogue.speeches);
             OnSpeechChange(_speeches.Dequeue());
